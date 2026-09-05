@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <title>Vila Azular | Consulte sua estadia</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -16,297 +14,247 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f4f9fa;
-            color: #17324d;
+            background: #f4f8f9;
+            color: #243238;
         }
 
         header {
-            background: linear-gradient(135deg, #087fa3, #18a4c4);
+            background: linear-gradient(135deg, #007c91, #00a7b8);
             color: white;
+            padding: 35px 20px;
             text-align: center;
-            padding: 45px 20px 50px;
         }
 
-        .logo {
-            font-size: 48px;
-            margin-bottom: 10px;
+        header .emoji {
+            font-size: 42px;
+            margin-bottom: 8px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 34px;
+            font-size: 32px;
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 17px;
+            margin: 8px 0 0;
+            font-size: 16px;
             opacity: 0.95;
         }
 
         .container {
-            max-width: 900px;
-            margin: -25px auto 50px;
+            max-width: 700px;
+            margin: 35px auto;
             padding: 0 20px;
         }
 
         .card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 22px;
-            box-shadow: 0 8px 30px rgba(25, 70, 85, 0.10);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         h2 {
             margin-top: 0;
-            color: #126782;
+            color: #007c91;
+            text-align: center;
         }
 
         .intro {
             text-align: center;
+            color: #607078;
+            margin-bottom: 28px;
+            line-height: 1.5;
         }
 
-        .intro h2 {
-            margin-bottom: 8px;
-        }
-
-        .intro p {
-            color: #687985;
-            line-height: 1.6;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .form-group {
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
             font-weight: bold;
-            font-size: 14px;
             margin-bottom: 7px;
         }
 
-        input {
+        input,
+        select {
             width: 100%;
-            height: 50px;
-            border: 1px solid #d5e1e5;
-            border-radius: 10px;
-            padding: 0 14px;
+            padding: 13px;
+            border: 1px solid #ccd8dc;
+            border-radius: 9px;
             font-size: 16px;
-            background: #fafcfd;
-            color: #17324d;
+            background: white;
         }
 
-        input:focus {
+        input:focus,
+        select:focus {
             outline: none;
-            border-color: #1595b6;
-            box-shadow: 0 0 0 3px rgba(21,149,182,.12);
+            border-color: #00a7b8;
+            box-shadow: 0 0 0 2px rgba(0, 167, 184, 0.12);
         }
 
-        .field {
-            margin-bottom: 20px;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        .info {
-            background: #eef9fb;
-            border-radius: 14px;
+        .resultado {
+            background: #eef9fa;
+            border-radius: 12px;
             padding: 20px;
-            margin-top: 10px;
+            margin-top: 25px;
+            border: 1px solid #ccecef;
         }
 
-        .info-row {
+        .resultado-linha {
             display: flex;
             justify-content: space-between;
+            gap: 15px;
             padding: 7px 0;
-            color: #536875;
+        }
+
+        .resultado-linha strong {
+            color: #007c91;
         }
 
         .total {
-            border-top: 1px solid #d7e9ed;
+            border-top: 1px solid #ccecef;
             margin-top: 10px;
             padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 24px;
+            font-size: 22px;
+        }
+
+        .total strong {
+            color: #007c91;
+        }
+
+        .status {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 9px;
+            text-align: center;
             font-weight: bold;
-            color: #08718f;
+            line-height: 1.4;
+        }
+
+        .status.disponivel {
+            background: #e8f7ed;
+            color: #20733c;
+            border: 1px solid #b9e2c5;
+        }
+
+        .status.indisponivel {
+            background: #fff0f0;
+            color: #a32929;
+            border: 1px solid #efc2c2;
+        }
+
+        .status.aviso {
+            background: #fff8e6;
+            color: #8a6200;
+            border: 1px solid #ead69c;
         }
 
         button {
             width: 100%;
-            height: 55px;
+            margin-top: 25px;
+            padding: 16px;
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #087fa3, #18a4c4);
+            border-radius: 10px;
+            background: #25d366;
             color: white;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
-            transition: .2s;
+            transition: 0.2s;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(8,127,163,.25);
+            background: #1ebe5d;
+            transform: translateY(-1px);
         }
 
-        .policy {
-            border-bottom: 1px solid #e5edef;
-            padding: 15px 0;
+        button:disabled {
+            background: #aeb9bc;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .policy:last-child {
-            border-bottom: none;
-        }
-
-        .policy strong {
-            display: block;
-            margin-bottom: 5px;
-            color: #28556b;
-        }
-
-        .policy span {
-            color: #667983;
-            line-height: 1.5;
+        .info {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f6f8f9;
+            border-radius: 10px;
             font-size: 14px;
+            line-height: 1.6;
+            color: #58666c;
         }
 
-        .highlight {
-            background: #fff8e8;
-            border-left: 4px solid #e5a72d;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            color: #66501d;
-            line-height: 1.5;
+        .info strong {
+            color: #33444a;
         }
 
         footer {
             text-align: center;
-            color: #8798a1;
+            color: #7a888d;
             font-size: 13px;
-            padding: 10px 20px 30px;
+            padding: 25px 20px 40px;
         }
 
-        .error {
-            color: #b53b3b;
-            font-size: 14px;
-            margin-top: 8px;
-            display: none;
-        }
-
-        @media (max-width: 650px) {
-
-            header {
-                padding: 35px 20px 45px;
-            }
-
+        @media (max-width: 600px) {
             header h1 {
-                font-size: 28px;
-            }
-
-            .container {
-                margin-top: -20px;
+                font-size: 27px;
             }
 
             .card {
-                padding: 22px;
+                padding: 20px;
             }
 
             .grid {
                 grid-template-columns: 1fr;
                 gap: 0;
             }
-
-            .total {
-                font-size: 21px;
-            }
         }
-
     </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-    <div class="logo">🏖️</div>
-
+    <div class="emoji">🏖️</div>
     <h1>Vila Azular</h1>
-
     <p>Perequê-Açu • Ubatuba/SP</p>
-
 </header>
-
 
 <div class="container">
 
-
-    <div class="card intro">
+    <div class="card">
 
         <h2>Consulte sua estadia</h2>
 
-        <p>
-            Escolha suas datas e consulte o valor estimado
-            para sua hospedagem na Vila Azular.
-        </p>
-
-    </div>
-
-
-    <div class="card">
-
-        <h2>📅 Escolha suas datas</h2>
-
+        <div class="intro">
+            Escolha as datas da sua viagem e a quantidade de hóspedes
+            para consultar a disponibilidade e obter uma estimativa inicial.
+        </div>
 
         <div class="grid">
 
-            <div class="field">
-
-                <label for="entrada">
-                    Data de entrada
-                </label>
-
-                <input
-                    type="date"
-                    id="entrada"
-                    onchange="calcular()"
-                >
-
+            <div class="form-group">
+                <label for="entrada">Data de entrada</label>
+                <input type="date" id="entrada">
             </div>
 
-
-            <div class="field">
-
-                <label for="saida">
-                    Data de saída
-                </label>
-
-                <input
-                    type="date"
-                    id="saida"
-                    onchange="calcular()"
-                >
-
-                <div id="erro" class="error">
-                    A estadia mínima é de 2 noites.
-                </div>
-
+            <div class="form-group">
+                <label for="saida">Data de saída</label>
+                <input type="date" id="saida">
             </div>
 
         </div>
 
-
-        <div class="field">
-
-            <label for="hospedes">
-                👥 Número de hóspedes
-            </label>
+        <div class="form-group">
+            <label for="hospedes">Quantidade de hóspedes</label>
 
             <input
                 type="number"
@@ -314,150 +262,414 @@
                 min="1"
                 max="18"
                 value="12"
-                onchange="calcular()"
+                oninput="calcular()"
             >
-
         </div>
 
+        <div class="resultado">
 
-        <div class="info">
-
-            <div class="info-row">
+            <div class="resultado-linha">
                 <span>Diária</span>
                 <strong>R$ 1.000,00</strong>
             </div>
 
-            <div class="info-row">
-                <span>Noites</span>
-                <strong id="numeroNoites">0</strong>
+            <div class="resultado-linha">
+                <span>Quantidade de noites</span>
+                <strong id="noites">-</strong>
             </div>
 
-            <div class="info-row">
-                <span>Hóspedes</span>
-                <strong id="numeroHospedes">12</strong>
-            </div>
-
-            <div class="total">
-                <span>Total estimado</span>
-                <span id="total">R$ 0,00</span>
+            <div class="resultado-linha total">
+                <span>Valor estimado</span>
+                <strong id="total">R$ 0,00</strong>
             </div>
 
         </div>
 
+        <div id="status"></div>
 
-        <button onclick="solicitarReserva()">
-            SOLICITAR RESERVA
+        <button
+            id="botaoReserva"
+            onclick="solicitarReserva()"
+            disabled
+        >
+            SOLICITAR RESERVA PELO WHATSAPP
         </button>
 
-    </div>
+        <div class="info">
 
+            <strong>Informações importantes</strong>
 
-    <div class="card">
+            <br><br>
 
-        <h2>📋 Políticas da hospedagem</h2>
+            • Estadia mínima: <strong>2 noites</strong><br>
+            • Capacidade máxima: <strong>18 hóspedes</strong><br>
+            • O checkout ocorre até o horário informado pela hospedagem.<br>
+            • A solicitação será encaminhada pelo WhatsApp para confirmação.<br>
+            • O valor apresentado é uma <strong>estimativa inicial</strong> e poderá
+              sofrer alterações em datas especiais, feriados, eventos ou períodos
+              de alta demanda.
 
+            <br><br>
 
-        <div class="policy">
+            <strong>Calendário de disponibilidade</strong>
 
-            <strong>Estadia mínima</strong>
+            <br>
 
-            <span>
-                A estadia mínima é de 2 noites.
-            </span>
-
-        </div>
-
-
-        <div class="policy">
-
-            <strong>Check-in</strong>
-
-            <span>
-                O horário de entrada será combinado previamente
-                com o responsável pela hospedagem.
-            </span>
-
-        </div>
-
-
-        <div class="policy">
-
-            <strong>Check-out</strong>
-
-            <span>
-                O horário de saída será informado e combinado
-                no momento da confirmação da reserva.
-            </span>
-
-        </div>
-
-
-        <div class="policy">
-
-            <strong>Capacidade</strong>
-
-            <span>
-                A Vila Azular possui capacidade para até 18 hóspedes.
-            </span>
-
-        </div>
-
-
-        <div class="policy">
-
-            <strong>Confirmação</strong>
-
-            <span>
-                O preenchimento deste formulário não garante a reserva.
-                A estadia somente será considerada confirmada após
-                a confirmação da disponibilidade e das condições
-                pelo responsável pela Vila Azular.
-            </span>
-
-        </div>
-
-
-        <div class="policy">
-
-            <strong>Cancelamento</strong>
-
-            <span>
-                As condições de cancelamento serão informadas
-                antes da confirmação da reserva.
-            </span>
-
-        </div>
-
-
-        <div class="highlight">
-
-            💡 <strong>Importante:</strong>
-            o valor apresentado nesta página é uma estimativa
-            baseada na tarifa informada. Datas especiais, feriados,
-            eventos e períodos de alta demanda poderão possuir
-            valores diferentes.
+            As datas bloqueadas e reservas existentes são consideradas com base
+            no calendário de reservas da Vila Azular.
 
         </div>
 
     </div>
-
 
 </div>
 
-
 <footer>
-
-    Vila Azular • Perequê-Açu • Ubatuba/SP<br>
-    Sua casa perto do mar 🌊
-
+    Vila Azular • Perequê-Açu • Ubatuba/SP
 </footer>
-
 
 
 <script>
 
+    /*
+    ============================================================
+    CONFIGURAÇÕES
+    ============================================================
+    */
+
     const diaria = 1000;
 
+    const minimoNoites = 2;
+
+    const maxHospedes = 18;
+
+    /*
+    Número do WhatsApp da Vila Azular
+    Formato internacional, sem espaços ou símbolos.
+    */
+
+    const whatsapp = "5512996444598";
+
+
+    /*
+    ============================================================
+    RESERVAS CONFIRMADAS
+    ============================================================
+    */
+
+    const reservas = [
+
+        {
+            entrada: "2026-09-05",
+            saida: "2026-09-08"
+        },
+
+        {
+            entrada: "2026-09-12",
+            saida: "2026-09-15"
+        },
+
+        {
+            entrada: "2026-09-18",
+            saida: "2026-09-20"
+        },
+
+        {
+            entrada: "2026-10-08",
+            saida: "2026-10-13"
+        },
+
+        {
+            entrada: "2026-10-23",
+            saida: "2026-10-25"
+        },
+
+        {
+            entrada: "2026-10-30",
+            saida: "2026-11-03"
+        },
+
+        {
+            entrada: "2026-11-07",
+            saida: "2026-11-09"
+        },
+
+        {
+            entrada: "2026-11-19",
+            saida: "2026-11-22"
+        },
+
+        {
+            entrada: "2027-01-05",
+            saida: "2027-01-13"
+        }
+
+    ];
+
+
+    /*
+    ============================================================
+    BLOQUEIOS / NOT AVAILABLE
+    ============================================================
+    */
+
+    const bloqueios = [
+
+        {
+            entrada: "2026-09-03",
+            saida: "2026-09-05"
+        },
+
+        {
+            entrada: "2026-09-08",
+            saida: "2026-09-12"
+        },
+
+        {
+            entrada: "2026-09-15",
+            saida: "2026-09-18"
+        },
+
+        {
+            entrada: "2026-09-20",
+            saida: "2026-09-22"
+        },
+
+        {
+            entrada: "2026-10-06",
+            saida: "2026-10-08"
+        },
+
+        {
+            entrada: "2026-10-13",
+            saida: "2026-10-15"
+        },
+
+        {
+            entrada: "2026-10-21",
+            saida: "2026-10-23"
+        },
+
+        {
+            entrada: "2026-10-25",
+            saida: "2026-10-27"
+        },
+
+        {
+            entrada: "2026-10-28",
+            saida: "2026-10-30"
+        },
+
+        {
+            entrada: "2026-11-03",
+            saida: "2026-11-07"
+        },
+
+        {
+            entrada: "2026-11-09",
+            saida: "2026-11-11"
+        },
+
+        {
+            entrada: "2026-11-17",
+            saida: "2026-11-19"
+        },
+
+        {
+            entrada: "2026-11-22",
+            saida: "2026-11-24"
+        },
+
+        {
+            entrada: "2027-01-03",
+            saida: "2027-01-05"
+        },
+
+        {
+            entrada: "2027-01-13",
+            saida: "2027-01-15"
+        }
+
+    ];
+
+
+    /*
+    ============================================================
+    CONVERTER DATA
+    ============================================================
+    */
+
+    function converterData(data) {
+
+        const partes = data.split("-");
+
+        return new Date(
+            Number(partes[0]),
+            Number(partes[1]) - 1,
+            Number(partes[2])
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    VERIFICAR CONFLITO
+    ============================================================
+
+    Exemplo:
+
+    Reserva:
+    05/09 → 08/09
+
+    Nova reserva:
+    08/09 → 10/09
+
+    É permitida.
+
+    O dia do checkout pode ser utilizado como
+    novo check-in.
+    */
+
+    function existeConflito(entrada, saida, lista) {
+
+        const novaEntrada = converterData(entrada);
+        const novaSaida = converterData(saida);
+
+        return lista.some(periodo => {
+
+            const periodoEntrada =
+                converterData(periodo.entrada);
+
+            const periodoSaida =
+                converterData(periodo.saida);
+
+            return (
+                novaEntrada < periodoSaida &&
+                novaSaida > periodoEntrada
+            );
+
+        });
+
+    }
+
+
+    /*
+    ============================================================
+    VERIFICAR DISPONIBILIDADE
+    ============================================================
+    */
+
+    function verificarDisponibilidade(entrada, saida) {
+
+        if (
+            existeConflito(
+                entrada,
+                saida,
+                reservas
+            )
+        ) {
+
+            return false;
+
+        }
+
+        if (
+            existeConflito(
+                entrada,
+                saida,
+                bloqueios
+            )
+        ) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+
+    /*
+    ============================================================
+    FORMATAR MOEDA
+    ============================================================
+    */
+
+    function formatarMoeda(valor) {
+
+        return valor.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    FORMATAR DATA PARA WHATSAPP
+    ============================================================
+    */
+
+    function formatarData(data) {
+
+        const partes = data.split("-");
+
+        return (
+            partes[2] +
+            "/" +
+            partes[1] +
+            "/" +
+            partes[0]
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    CONFIGURAR DATAS MÍNIMAS
+    ============================================================
+    */
+
+    function configurarDatasMinimas() {
+
+        const hoje = new Date();
+
+        const ano = hoje.getFullYear();
+
+        const mes = String(
+            hoje.getMonth() + 1
+        ).padStart(2, "0");
+
+        const dia = String(
+            hoje.getDate()
+        ).padStart(2, "0");
+
+        const hojeFormatado =
+            `${ano}-${mes}-${dia}`;
+
+        document
+            .getElementById("entrada")
+            .min = hojeFormatado;
+
+        document
+            .getElementById("saida")
+            .min = hojeFormatado;
+
+    }
+
+
+    /*
+    ============================================================
+    CALCULAR ESTADIA
+    ============================================================
+    */
 
     function calcular() {
 
@@ -468,75 +680,194 @@
             document.getElementById("saida").value;
 
         const hospedes =
-            Number(document.getElementById("hospedes").value);
+            Number(
+                document.getElementById("hospedes").value
+            );
+
+        const noitesElemento =
+            document.getElementById("noites");
+
+        const totalElemento =
+            document.getElementById("total");
+
+        const status =
+            document.getElementById("status");
+
+        const botao =
+            document.getElementById("botaoReserva");
 
 
-        document.getElementById("numeroHospedes").innerText =
-            hospedes || 0;
+        /*
+        Limpar estado
+        */
+
+        botao.disabled = true;
+
+        status.innerHTML = "";
+
+        noitesElemento.textContent = "-";
+
+        totalElemento.textContent =
+            formatarMoeda(0);
 
 
-        if (!entrada || !saida) {
+        /*
+        Validar hóspedes
+        */
 
-            document.getElementById("numeroNoites").innerText = "0";
+        if (
+            hospedes < 1 ||
+            hospedes > maxHospedes
+        ) {
 
-            document.getElementById("total").innerText =
-                "R$ 0,00";
+            status.innerHTML = `
+                <div class="status aviso">
+                    A quantidade de hóspedes deve estar
+                    entre 1 e 18 pessoas.
+                </div>
+            `;
 
             return;
+
         }
 
 
+        /*
+        Se ainda não escolheu as datas
+        */
+
+        if (!entrada || !saida) {
+
+            return;
+
+        }
+
+
+        /*
+        Converter datas
+        */
+
         const dataEntrada =
-            new Date(entrada + "T00:00:00");
+            converterData(entrada);
 
         const dataSaida =
-            new Date(saida + "T00:00:00");
+            converterData(saida);
 
+
+        /*
+        Data de saída deve ser posterior
+        */
+
+        if (dataSaida <= dataEntrada) {
+
+            status.innerHTML = `
+                <div class="status indisponivel">
+                    A data de saída deve ser posterior
+                    à data de entrada.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        /*
+        Calcular noites
+        */
 
         const diferenca =
             dataSaida - dataEntrada;
 
-
         const noites =
             Math.round(
-                diferenca / (1000 * 60 * 60 * 24)
+                diferenca /
+                (1000 * 60 * 60 * 24)
             );
 
 
-        document.getElementById("numeroNoites").innerText =
-            noites > 0 ? noites : 0;
+        noitesElemento.textContent =
+            noites;
 
 
-        if (noites < 2) {
+        /*
+        Mínimo de noites
+        */
 
-            document.getElementById("erro").style.display =
-                "block";
+        if (noites < minimoNoites) {
 
-            document.getElementById("total").innerText =
-                "Mínimo de 2 noites";
+            status.innerHTML = `
+                <div class="status aviso">
+                    A estadia mínima é de
+                    ${minimoNoites} noites.
+                </div>
+            `;
 
             return;
 
         }
 
 
-        document.getElementById("erro").style.display =
-            "none";
-
+        /*
+        Calcular valor
+        */
 
         const total =
             noites * diaria;
 
 
-        document.getElementById("total").innerText =
-            total.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL"
-            });
+        totalElemento.textContent =
+            formatarMoeda(total);
+
+
+        /*
+        Verificar disponibilidade
+        */
+
+        const disponivel =
+            verificarDisponibilidade(
+                entrada,
+                saida
+            );
+
+
+        if (!disponivel) {
+
+            status.innerHTML = `
+                <div class="status indisponivel">
+                    ❌ As datas selecionadas não estão
+                    disponíveis.
+                    <br>
+                    Por favor, escolha outro período.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        /*
+        Tudo certo
+        */
+
+        status.innerHTML = `
+            <div class="status disponivel">
+                ✓ Datas disponíveis para
+                solicitação de reserva.
+            </div>
+        `;
+
+        botao.disabled = false;
 
     }
 
 
+    /*
+    ============================================================
+    SOLICITAR RESERVA
+    ============================================================
+    */
 
     function solicitarReserva() {
 
@@ -547,102 +878,188 @@
             document.getElementById("saida").value;
 
         const hospedes =
-            document.getElementById("hospedes").value;
+            Number(
+                document.getElementById("hospedes").value
+            );
 
+
+        /*
+        Validação final de segurança
+        */
 
         if (!entrada || !saida) {
 
-            alert("Escolha as datas de entrada e saída.");
+            alert(
+                "Selecione as datas de entrada e saída."
+            );
 
             return;
 
         }
 
 
+        if (
+            hospedes < 1 ||
+            hospedes > maxHospedes
+        ) {
+
+            alert(
+                "A quantidade de hóspedes deve estar entre 1 e 18."
+            );
+
+            return;
+
+        }
+
+
+        /*
+        Verificar novamente a disponibilidade
+        antes de abrir o WhatsApp.
+        */
+
+        if (
+            !verificarDisponibilidade(
+                entrada,
+                saida
+            )
+        ) {
+
+            alert(
+                "Desculpe, essas datas não estão mais disponíveis."
+            );
+
+            calcular();
+
+            return;
+
+        }
+
+
+        /*
+        Calcular noites
+        */
+
         const dataEntrada =
-            new Date(entrada + "T00:00:00");
+            converterData(entrada);
 
         const dataSaida =
-            new Date(saida + "T00:00:00");
+            converterData(saida);
 
+        const diferenca =
+            dataSaida - dataEntrada;
 
         const noites =
             Math.round(
-                (dataSaida - dataEntrada) /
+                diferenca /
                 (1000 * 60 * 60 * 24)
             );
 
 
-        if (noites < 2) {
+        /*
+        Validar mínimo
+        */
 
-            alert("A estadia mínima é de 2 noites.");
+        if (noites < minimoNoites) {
+
+            alert(
+                `A estadia mínima é de ${minimoNoites} noites.`
+            );
 
             return;
 
         }
 
+
+        /*
+        Calcular valor
+        */
 
         const total =
             noites * diaria;
 
 
-        const entradaFormatada =
-            dataEntrada.toLocaleDateString("pt-BR");
-
-        const saidaFormatada =
-            dataSaida.toLocaleDateString("pt-BR");
-
+        /*
+        ========================================================
+        MENSAGEM DO WHATSAPP
+        ========================================================
+        */
 
         const mensagem =
-            "Olá! Gostaria de solicitar uma reserva na Vila Azular.%0A%0A" +
-            "📅 Entrada: " + entradaFormatada + "%0A" +
-            "📅 Saída: " + saidaFormatada + "%0A" +
-            "🌙 Noites: " + noites + "%0A" +
-            "👥 Hóspedes: " + hospedes + "%0A" +
-            "💰 Valor estimado: R$ " +
-            total.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2
-            }) +
-            "%0A%0A" +
-            "Gostaria de confirmar a disponibilidade dessas datas.";
+`Olá! Gostaria de solicitar uma reserva na Vila Azular.
+
+📅 Entrada: ${formatarData(entrada)}
+📅 Saída: ${formatarData(saida)}
+🌙 Noites: ${noites}
+👥 Hóspedes: ${hospedes} pessoa${hospedes === 1 ? "" : "s"}
+💰 Valor estimado: ${formatarMoeda(total)}
+
+Gostaria de confirmar a disponibilidade e prosseguir com a reserva.`;
 
 
         /*
-         * SUBSTITUIR PELO SEU NÚMERO DO WHATSAPP
-         *
-         * Exemplo:
-         * const telefone = "5511999999999";
-         */
+        Codificar mensagem para URL
+        */
 
-        const telefone = "SEU_NUMERO_AQUI";
+        const url =
+            `https://wa.me/${whatsapp}?text=` +
+            encodeURIComponent(mensagem);
 
 
-        if (telefone === "SEU_NUMERO_AQUI") {
-
-            alert(
-                "A calculadora está funcionando! " +
-                "Para ativar o WhatsApp, coloque o número da Vila Azular " +
-                "no código."
-            );
-
-            return;
-
-        }
-
+        /*
+        Abrir WhatsApp
+        */
 
         window.open(
-            "https://wa.me/" +
-            telefone +
-            "?text=" +
-            mensagem,
+            url,
             "_blank"
         );
 
     }
 
-</script>
 
+    /*
+    ============================================================
+    EVENTOS
+    ============================================================
+    */
+
+    document
+        .getElementById("entrada")
+        .addEventListener(
+            "change",
+            function() {
+
+                const entrada = this.value;
+
+                document
+                    .getElementById("saida")
+                    .min = entrada;
+
+                calcular();
+
+            }
+        );
+
+
+    document
+        .getElementById("saida")
+        .addEventListener(
+            "change",
+            calcular
+        );
+
+
+    /*
+    ============================================================
+    INICIALIZAÇÃO
+    ============================================================
+    */
+
+    configurarDatasMinimas();
+
+    calcular();
+
+</script>
 
 </body>
 </html>
-```
