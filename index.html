@@ -3,252 +3,529 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Vila Azular | Consulte sua estadia</title>
+<title>Vila Azular | Consulte sua estadia</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f8f9;
-            color: #243238;
-        }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f8f9;
+    color: #243238;
+}
 
-        header {
-            background: linear-gradient(135deg, #007c91, #00a7b8);
-            color: white;
-            padding: 35px 20px;
-            text-align: center;
-        }
+header {
+    background: linear-gradient(135deg, #007c91, #00a7b8);
+    color: white;
+    padding: 35px 20px;
+    text-align: center;
+}
 
-        header .emoji {
-            font-size: 42px;
-            margin-bottom: 8px;
-        }
+header .emoji {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
 
-        header p {
-            margin: 8px 0 0;
-            font-size: 16px;
-            opacity: 0.95;
-        }
+header p {
+    margin: 8px 0 0;
+    font-size: 16px;
+    opacity: .95;
+}
 
-        .container {
-            max-width: 700px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
+.container {
+    max-width: 760px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
 
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
 
-        h2 {
-            margin-top: 0;
-            color: #007c91;
-            text-align: center;
-        }
+h2 {
+    margin-top: 0;
+    color: #007c91;
+    text-align: center;
+}
 
-        .intro {
-            text-align: center;
-            color: #607078;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
+.intro {
+    text-align: center;
+    color: #607078;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
+/* =========================================================
+   CALENDÁRIO
+========================================================= */
 
-        input,
-        select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ccd8dc;
-            border-radius: 9px;
-            font-size: 16px;
-            background: white;
-        }
+.calendar-wrapper {
+    border: 1px solid #dce7e9;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+}
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #00a7b8;
-            box-shadow: 0 0 0 2px rgba(0, 167, 184, 0.12);
-        }
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f5fafb;
+    border-bottom: 1px solid #dce7e9;
+}
 
-        .resultado {
-            background: #eef9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 25px;
-            border: 1px solid #ccecef;
-        }
+.calendar-header button {
+    width: 42px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #cddfe2;
+    background: white;
+    color: #007c91;
+    border-radius: 8px;
+    font-size: 22px;
+    cursor: pointer;
+}
 
-        .resultado-linha {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 7px 0;
-        }
+.calendar-header button:hover {
+    background: #eef8fa;
+    transform: none;
+}
 
-        .resultado-linha strong {
-            color: #007c91;
-        }
+#mesAtual {
+    font-size: 19px;
+    font-weight: bold;
+    color: #007c91;
+    text-transform: capitalize;
+}
 
-        .total {
-            border-top: 1px solid #ccecef;
-            margin-top: 10px;
-            padding-top: 15px;
-            font-size: 22px;
-        }
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #007c91;
+    color: white;
+}
 
-        .total strong {
-            color: #007c91;
-        }
+.dias-semana div {
+    text-align: center;
+    padding: 9px 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
 
-        .detalhamento {
-            margin-top: 18px;
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #dce7e9;
-            overflow: hidden;
-        }
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
 
-        .detalhamento-titulo {
-            padding: 12px 15px;
-            font-weight: bold;
-            color: #007c91;
-            background: #f5fafb;
-            border-bottom: 1px solid #dce7e9;
-        }
+.dia {
+    min-height: 66px;
+    border-right: 1px solid #edf1f2;
+    border-bottom: 1px solid #edf1f2;
+    padding: 6px;
+    position: relative;
+    background: white;
+    cursor: pointer;
+    transition: .15s;
+}
 
-        .diaria-linha {
-            display: flex;
-            justify-content: space-between;
-            padding: 9px 15px;
-            border-bottom: 1px solid #edf1f2;
-            font-size: 14px;
-        }
+.dia:hover:not(.bloqueado):not(.vazio) {
+    background: #f0fafb;
+}
 
-        .diaria-linha:last-child {
-            border-bottom: none;
-        }
+.dia.vazio {
+    background: #fafcfc;
+    cursor: default;
+}
 
-        .status {
-            margin-top: 18px;
-            padding: 14px;
-            border-radius: 9px;
-            text-align: center;
-            font-weight: bold;
-            line-height: 1.4;
-        }
+.numero-dia {
+    font-size: 15px;
+    font-weight: bold;
+}
 
-        .status.disponivel {
-            background: #e8f7ed;
-            color: #20733c;
-            border: 1px solid #b9e2c5;
-        }
+.minimo {
+    display: block;
+    font-size: 10px;
+    color: #007c91;
+    margin-top: 6px;
+    font-weight: bold;
+}
 
-        .status.indisponivel {
-            background: #fff0f0;
-            color: #a32929;
-            border: 1px solid #efc2c2;
-        }
+.dia.hoje .numero-dia {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #007c91;
+    color: white;
+}
 
-        .status.aviso {
-            background: #fff8e6;
-            color: #8a6200;
-            border: 1px solid #ead69c;
-        }
+.dia.bloqueado {
+    background: #f2f3f3;
+    color: #a5acad;
+    cursor: not-allowed;
+}
 
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 16px;
-            border: none;
-            border-radius: 10px;
-            background: #25d366;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.dia.bloqueado::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top: 50%;
+    height: 1px;
+    background: #a5acad;
+    transform: rotate(-25deg);
+}
 
-        button:hover {
-            background: #1ebe5d;
-            transform: translateY(-1px);
-        }
+.dia.bloqueado .minimo {
+    color: #a5acad;
+}
 
-        button:disabled {
-            background: #aeb9bc;
-            cursor: not-allowed;
-            transform: none;
-        }
+.dia.selecionado {
+    background: #d9f5f7;
+    box-shadow: inset 0 0 0 2px #00a7b8;
+}
 
-        .info {
-            margin-top: 25px;
-            padding: 18px;
-            background: #f6f8f9;
-            border-radius: 10px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #58666c;
-        }
+.dia.intervalo {
+    background: #eefafa;
+}
 
-        .info strong {
-            color: #33444a;
-        }
+.dia.entrada {
+    background: #00a7b8;
+    color: white;
+}
 
-        footer {
-            text-align: center;
-            color: #7a888d;
-            font-size: 13px;
-            padding: 25px 20px 40px;
-        }
+.dia.entrada .minimo {
+    color: white;
+}
 
-        @media (max-width: 600px) {
+.dia.saida {
+    background: #007c91;
+    color: white;
+}
 
-            header h1 {
-                font-size: 27px;
-            }
+.dia.saida .minimo {
+    color: white;
+}
 
-            .card {
-                padding: 20px;
-            }
 
-            .total {
-                font-size: 20px;
-            }
+/* =========================================================
+   LEGENDA
+========================================================= */
 
-        }
+.legenda {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 13px;
+    font-size: 12px;
+    color: #647278;
+    border-top: 1px solid #edf1f2;
+}
 
-    </style>
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.exemplo-dia {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccd8da;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.exemplo-bloqueado {
+    background: #f2f3f3;
+    text-decoration: line-through;
+}
+
+.exemplo-minimo {
+    color: #007c91;
+}
+
+
+/* =========================================================
+   SELEÇÃO
+========================================================= */
+
+.selecao {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.selecao-box {
+    padding: 14px;
+    border: 1px solid #dce7e9;
+    border-radius: 10px;
+    background: #fafcfc;
+}
+
+.selecao-box small {
+    display: block;
+    color: #718086;
+    margin-bottom: 5px;
+}
+
+.selecao-box strong {
+    color: #007c91;
+}
+
+
+/* =========================================================
+   HÓSPEDES
+========================================================= */
+
+.form-group {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd8dc;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   RESULTADO
+========================================================= */
+
+.resultado {
+    background: #eef9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid #ccecef;
+}
+
+.resultado-linha {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 7px 0;
+}
+
+.resultado-linha strong {
+    color: #007c91;
+}
+
+.total {
+    border-top: 1px solid #ccecef;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-size: 22px;
+}
+
+.total strong {
+    color: #007c91;
+}
+
+
+/* =========================================================
+   DETALHAMENTO
+========================================================= */
+
+.detalhamento {
+    margin-top: 18px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #dce7e9;
+    overflow: hidden;
+}
+
+.detalhamento-titulo {
+    padding: 12px 15px;
+    font-weight: bold;
+    color: #007c91;
+    background: #f5fafb;
+    border-bottom: 1px solid #dce7e9;
+}
+
+.diaria-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 15px;
+    border-bottom: 1px solid #edf1f2;
+    font-size: 14px;
+}
+
+.diaria-linha:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 9px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.status.disponivel {
+    background: #e8f7ed;
+    color: #20733c;
+    border: 1px solid #b9e2c5;
+}
+
+.status.indisponivel {
+    background: #fff0f0;
+    color: #a32929;
+    border: 1px solid #efc2c2;
+}
+
+.status.aviso {
+    background: #fff8e6;
+    color: #8a6200;
+    border: 1px solid #ead69c;
+}
+
+
+/* =========================================================
+   BOTÃO
+========================================================= */
+
+#botaoReserva {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #25d366;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#botaoReserva:hover:not(:disabled) {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+}
+
+#botaoReserva:disabled {
+    background: #aeb9bc;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info {
+    margin-top: 25px;
+    padding: 18px;
+    background: #f6f8f9;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #58666c;
+}
+
+.info strong {
+    color: #33444a;
+}
+
+footer {
+    text-align: center;
+    color: #7a888d;
+    font-size: 13px;
+    padding: 25px 20px 40px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .dia {
+        min-height: 58px;
+        padding: 5px;
+    }
+
+    .numero-dia {
+        font-size: 13px;
+    }
+
+    .minimo {
+        font-size: 9px;
+        margin-top: 4px;
+    }
+
+    .dias-semana div {
+        font-size: 10px;
+    }
+
+    .selecao {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .total {
+        font-size: 20px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -269,193 +546,86 @@
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
 
-        <h2>Consulte sua estadia</h2>
+<h2>Consulte sua estadia</h2>
 
-        <div class="intro">
+<div class="intro">
 
-            Escolha as datas da sua viagem e a quantidade de hóspedes
-            para consultar a disponibilidade e o valor estimado da estadia.
+Escolha a data de entrada e depois a data de saída.
+As datas ocupadas aparecem bloqueadas no calendário.
 
-        </div>
-
-
-        <!-- DATAS -->
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-
-            <div class="form-group">
-
-                <label for="entrada">
-                    Data de entrada
-                </label>
-
-                <input
-                    type="date"
-                    id="entrada"
-                >
-
-            </div>
+</div>
 
 
-            <div class="form-group">
+<!-- =====================================================
+     CALENDÁRIO
+===================================================== -->
 
-                <label for="saida">
-                    Data de saída
-                </label>
+<div class="calendar-wrapper">
 
-                <input
-                    type="date"
-                    id="saida"
-                >
-
-            </div>
-
-        </div>
-
-
-        <!-- HÓSPEDES -->
-
-        <div class="form-group">
-
-            <label for="hospedes">
-                Quantidade de hóspedes
-            </label>
-
-            <input
-                type="number"
-                id="hospedes"
-                min="1"
-                max="18"
-                value="12"
-            >
-
-        </div>
-
-
-        <!-- RESULTADO -->
-
-        <div class="resultado">
-
-            <div class="resultado-linha">
-
-                <span>
-                    Hóspedes
-                </span>
-
-                <strong id="resumoHospedes">
-                    12
-                </strong>
-
-            </div>
-
-
-            <div class="resultado-linha">
-
-                <span>
-                    Quantidade de noites
-                </span>
-
-                <strong id="noites">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="resultado-linha">
-
-                <span>
-                    Mínimo exigido
-                </span>
-
-                <strong id="minimo">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="resultado-linha total">
-
-                <span>
-                    Valor estimado
-                </span>
-
-                <strong id="total">
-                    R$ 0,00
-                </strong>
-
-            </div>
-
-
-            <div
-                id="detalhamento"
-                class="detalhamento"
-                style="display:none;"
-            >
-
-                <div class="detalhamento-titulo">
-                    Valor por noite
-                </div>
-
-                <div id="listaDiarias"></div>
-
-            </div>
-
-        </div>
-
-
-        <!-- STATUS -->
-
-        <div id="status"></div>
-
-
-        <!-- BOTÃO -->
+    <div class="calendar-header">
 
         <button
-            id="botaoReserva"
-            onclick="solicitarReserva()"
-            disabled
+            type="button"
+            onclick="mesAnterior()"
+            aria-label="Mês anterior"
         >
-            SOLICITAR RESERVA PELO WHATSAPP
+            ‹
         </button>
 
+        <div id="mesAtual"></div>
 
-        <!-- INFORMAÇÕES -->
+        <button
+            type="button"
+            onclick="proximoMes()"
+            aria-label="Próximo mês"
+        >
+            ›
+        </button>
 
-        <div class="info">
+    </div>
 
-            <strong>Informações importantes</strong>
 
-            <br><br>
+    <div class="dias-semana">
 
-            • Os valores apresentados são baseados nos preços
-            atualmente configurados no PriceLabs.<br>
+        <div>DOM</div>
+        <div>SEG</div>
+        <div>TER</div>
+        <div>QUA</div>
+        <div>QUI</div>
+        <div>SEX</div>
+        <div>SÁB</div>
 
-            • O valor pode variar de acordo com a data escolhida.<br>
+    </div>
 
-            • A estadia mínima também pode variar conforme a data.<br>
 
-            • Capacidade máxima: <strong>18 hóspedes</strong>.<br>
+    <div
+        id="calendario"
+        class="calendario"
+    ></div>
 
-            • A disponibilidade é baseada no calendário de reservas
-            da Vila Azular.<br>
 
-            • A solicitação será encaminhada pelo WhatsApp para
-            confirmação da reserva.<br>
+    <div class="legenda">
 
-            • O valor exibido é uma estimativa inicial e a reserva
-            somente será confirmada após a confirmação da Vila Azular.
+        <div class="legenda-item">
 
-            <br><br>
+            <span class="exemplo-dia exemplo-bloqueado">
+                15
+            </span>
 
-            <strong>
-                Última atualização dos preços:
-            </strong>
+            Reservado / bloqueado
 
-            setembro/2026.
+        </div>
+
+
+        <div class="legenda-item">
+
+            <span class="exemplo-dia exemplo-minimo">
+                2n
+            </span>
+
+            Mínimo de noites
 
         </div>
 
@@ -464,9 +634,184 @@
 </div>
 
 
+<!-- =====================================================
+     DATAS ESCOLHIDAS
+===================================================== -->
+
+<div class="selecao">
+
+    <div class="selecao-box">
+
+        <small>Entrada</small>
+
+        <strong id="entradaTexto">
+            Selecione uma data
+        </strong>
+
+    </div>
+
+
+    <div class="selecao-box">
+
+        <small>Saída</small>
+
+        <strong id="saidaTexto">
+            Selecione uma data
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HÓSPEDES
+===================================================== -->
+
+<div class="form-group">
+
+    <label for="hospedes">
+        Quantidade de hóspedes
+    </label>
+
+    <input
+        type="number"
+        id="hospedes"
+        min="1"
+        max="18"
+        value="12"
+    >
+
+</div>
+
+
+<!-- =====================================================
+     RESULTADO
+===================================================== -->
+
+<div class="resultado">
+
+    <div class="resultado-linha">
+
+        <span>Hóspedes</span>
+
+        <strong id="resumoHospedes">
+            12
+        </strong>
+
+    </div>
+
+
+    <div class="resultado-linha">
+
+        <span>Noites</span>
+
+        <strong id="noites">
+            -
+        </strong>
+
+    </div>
+
+
+    <div class="resultado-linha">
+
+        <span>Mínimo para entrada</span>
+
+        <strong id="minimo">
+            -
+        </strong>
+
+    </div>
+
+
+    <div class="resultado-linha total">
+
+        <span>Valor estimado</span>
+
+        <strong id="total">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div
+        id="detalhamento"
+        class="detalhamento"
+        style="display:none;"
+    >
+
+        <div class="detalhamento-titulo">
+            Valor por noite
+        </div>
+
+        <div id="listaDiarias"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<div id="status"></div>
+
+
+<!-- =====================================================
+     BOTÃO
+===================================================== -->
+
+<button
+    id="botaoReserva"
+    onclick="solicitarReserva()"
+    disabled
+>
+    SOLICITAR RESERVA PELO WHATSAPP
+</button>
+
+
+<!-- =====================================================
+     INFORMAÇÕES
+===================================================== -->
+
+<div class="info">
+
+<strong>Como funciona</strong>
+
+<br><br>
+
+• Escolha primeiro a data de <strong>entrada</strong>.<br>
+
+• Depois escolha a data de <strong>saída</strong>.<br>
+
+• Datas já reservadas ou bloqueadas ficam riscadas
+e não podem ser selecionadas.<br>
+
+• O pequeno indicador <strong>2n, 3n, 4n, 5n</strong>
+mostra o mínimo de noites exigido para entrada naquela data.<br>
+
+• Os valores são calculados com base nos preços
+configurados no PriceLabs.<br>
+
+• O valor apresentado é uma estimativa inicial.
+A reserva somente será confirmada pela Vila Azular.
+
+<br><br>
+
+<strong>Capacidade máxima:</strong> 18 hóspedes.
+
+</div>
+
+</div>
+
+</div>
+
+
 <footer>
 
-    Vila Azular • Perequê-Açu • Ubatuba/SP
+Vila Azular • Perequê-Açu • Ubatuba/SP
 
 </footer>
 
@@ -474,485 +819,469 @@
 <script>
 
 
-/*
-============================================================
-CONFIGURAÇÕES
-============================================================
-*/
+/* ========================================================
+   CONFIGURAÇÕES
+======================================================== */
 
 
 const maxHospedes = 18;
 
-
-/*
-Número do WhatsApp
-*/
-
-const whatsapp = "551299644598";
+const whatsapp = "5512996444598";
 
 
-/*
-============================================================
-PREÇOS DO PRICELABS
-============================================================
-
-Utilizamos "Your Price" do CSV.
-
-Cada data possui seu próprio valor.
-
-============================================================
-*/
+/* ========================================================
+   PREÇOS — PRICELABS / YOUR PRICE
+======================================================== */
 
 
 const precos = {
 
-    "2026-09-05": 1291,
-    "2026-09-06": 1414,
-    "2026-09-07": 1253,
-    "2026-09-08": 1187,
-    "2026-09-09": 1154,
-    "2026-09-10": 1332,
-    "2026-09-11": 1438,
-    "2026-09-12": 1576,
-    "2026-09-13": 1481,
-    "2026-09-14": 1313,
-    "2026-09-15": 1256,
-    "2026-09-16": 998,
-    "2026-09-17": 1144,
-    "2026-09-18": 1341,
-    "2026-09-19": 1372,
-    "2026-09-20": 809,
-    "2026-09-21": 750,
-    "2026-09-22": 750,
-    "2026-09-23": 762,
-    "2026-09-24": 970,
-    "2026-09-25": 1043,
-    "2026-09-26": 1090,
-    "2026-09-27": 902,
-    "2026-09-28": 842,
-    "2026-09-29": 761,
-    "2026-09-30": 898,
+"2026-09-05":1291,
+"2026-09-06":1414,
+"2026-09-07":1253,
+"2026-09-08":1187,
+"2026-09-09":1154,
+"2026-09-10":1332,
+"2026-09-11":1438,
+"2026-09-12":1576,
+"2026-09-13":1481,
+"2026-09-14":1313,
+"2026-09-15":1256,
+"2026-09-16":998,
+"2026-09-17":1144,
+"2026-09-18":1341,
+"2026-09-19":1372,
+"2026-09-20":809,
+"2026-09-21":750,
+"2026-09-22":750,
+"2026-09-23":762,
+"2026-09-24":970,
+"2026-09-25":1043,
+"2026-09-26":1090,
+"2026-09-27":902,
+"2026-09-28":842,
+"2026-09-29":761,
+"2026-09-30":898,
 
-    "2026-10-01": 898,
-    "2026-10-02": 1071,
-    "2026-10-03": 980,
-    "2026-10-04": 884,
-    "2026-10-05": 983,
-    "2026-10-06": 874,
-    "2026-10-07": 1064,
-    "2026-10-08": 1305,
-    "2026-10-09": 1586,
-    "2026-10-10": 1523,
-    "2026-10-11": 1676,
-    "2026-10-12": 1705,
-    "2026-10-13": 1514,
-    "2026-10-14": 1415,
-    "2026-10-15": 1393,
-    "2026-10-16": 1578,
-    "2026-10-17": 1391,
-    "2026-10-18": 1411,
-    "2026-10-19": 1065,
-    "2026-10-20": 1053,
-    "2026-10-21": 1054,
-    "2026-10-22": 1147,
-    "2026-10-23": 1356,
-    "2026-10-24": 1292,
-    "2026-10-25": 1371,
-    "2026-10-26": 1330,
-    "2026-10-27": 2552,
-    "2026-10-28": 1300,
-    "2026-10-29": 1375,
-    "2026-10-30": 1435,
-    "2026-10-31": 1429,
+"2026-10-01":898,
+"2026-10-02":1071,
+"2026-10-03":980,
+"2026-10-04":884,
+"2026-10-05":983,
+"2026-10-06":874,
+"2026-10-07":1064,
+"2026-10-08":1305,
+"2026-10-09":1586,
+"2026-10-10":1523,
+"2026-10-11":1676,
+"2026-10-12":1705,
+"2026-10-13":1514,
+"2026-10-14":1415,
+"2026-10-15":1393,
+"2026-10-16":1578,
+"2026-10-17":1391,
+"2026-10-18":1411,
+"2026-10-19":1065,
+"2026-10-20":1053,
+"2026-10-21":1054,
+"2026-10-22":1147,
+"2026-10-23":1356,
+"2026-10-24":1292,
+"2026-10-25":1371,
+"2026-10-26":1330,
+"2026-10-27":2552,
+"2026-10-28":1300,
+"2026-10-29":1375,
+"2026-10-30":1435,
+"2026-10-31":1429,
 
-    "2026-11-01": 1623,
-    "2026-11-02": 1428,
-    "2026-11-03": 1401,
-    "2026-11-04": 1014,
-    "2026-11-05": 1019,
-    "2026-11-06": 1237,
-    "2026-11-07": 1197,
-    "2026-11-08": 1163,
-    "2026-11-09": 1017,
-    "2026-11-10": 992,
-    "2026-11-11": 1028,
-    "2026-11-12": 1063,
-    "2026-11-13": 1474,
-    "2026-11-14": 1476,
-    "2026-11-15": 1082,
-    "2026-11-16": 903,
-    "2026-11-17": 920,
-    "2026-11-18": 1130,
-    "2026-11-19": 1485,
-    "2026-11-20": 1628,
-    "2026-11-21": 1674,
-    "2026-11-22": 1309,
-    "2026-11-23": 1135,
-    "2026-11-24": 997,
-    "2026-11-25": 1135,
-    "2026-11-26": 1083,
-    "2026-11-27": 1266,
-    "2026-11-28": 1297,
-    "2026-11-29": 1195,
-    "2026-11-30": 1096,
+"2026-11-01":1623,
+"2026-11-02":1428,
+"2026-11-03":1401,
+"2026-11-04":1014,
+"2026-11-05":1019,
+"2026-11-06":1237,
+"2026-11-07":1197,
+"2026-11-08":1163,
+"2026-11-09":1017,
+"2026-11-10":992,
+"2026-11-11":1028,
+"2026-11-12":1063,
+"2026-11-13":1474,
+"2026-11-14":1476,
+"2026-11-15":1082,
+"2026-11-16":903,
+"2026-11-17":920,
+"2026-11-18":1130,
+"2026-11-19":1485,
+"2026-11-20":1628,
+"2026-11-21":1674,
+"2026-11-22":1309,
+"2026-11-23":1135,
+"2026-11-24":997,
+"2026-11-25":1135,
+"2026-11-26":1083,
+"2026-11-27":1266,
+"2026-11-28":1297,
+"2026-11-29":1195,
+"2026-11-30":1096,
 
-    "2026-12-01": 1124,
-    "2026-12-02": 1119,
-    "2026-12-03": 1158,
-    "2026-12-04": 1333,
-    "2026-12-05": 1359,
-    "2026-12-06": 1306,
-    "2026-12-07": 1269,
-    "2026-12-08": 1162,
-    "2026-12-09": 1281,
-    "2026-12-10": 1295,
-    "2026-12-11": 1373,
-    "2026-12-12": 1388,
-    "2026-12-13": 1329,
-    "2026-12-14": 1334,
-    "2026-12-15": 1340,
-    "2026-12-16": 1441,
-    "2026-12-17": 1604,
-    "2026-12-18": 1714,
-    "2026-12-19": 1831,
-    "2026-12-20": 1878,
-    "2026-12-21": 2169,
-    "2026-12-22": 2607,
-    "2026-12-23": 3613,
-    "2026-12-24": 3646,
-    "2026-12-25": 3652,
-    "2026-12-26": 3697,
-    "2026-12-27": 3908,
-    "2026-12-28": 4017,
-    "2026-12-29": 4247,
-    "2026-12-30": 5213,
-    "2026-12-31": 5491,
+"2026-12-01":1124,
+"2026-12-02":1119,
+"2026-12-03":1158,
+"2026-12-04":1333,
+"2026-12-05":1359,
+"2026-12-06":1306,
+"2026-12-07":1269,
+"2026-12-08":1162,
+"2026-12-09":1281,
+"2026-12-10":1295,
+"2026-12-11":1373,
+"2026-12-12":1388,
+"2026-12-13":1329,
+"2026-12-14":1334,
+"2026-12-15":1340,
+"2026-12-16":1441,
+"2026-12-17":1604,
+"2026-12-18":1714,
+"2026-12-19":1831,
+"2026-12-20":1878,
+"2026-12-21":2169,
+"2026-12-22":2607,
+"2026-12-23":3613,
+"2026-12-24":3646,
+"2026-12-25":3652,
+"2026-12-26":3697,
+"2026-12-27":3908,
+"2026-12-28":4017,
+"2026-12-29":4247,
+"2026-12-30":5213,
+"2026-12-31":5491,
 
-    "2027-01-01": 5295,
-    "2027-01-02": 5128,
-    "2027-01-03": 3949,
-    "2027-01-04": 2896,
-    "2027-01-05": 2602,
-    "2027-01-06": 2538,
-    "2027-01-07": 2738,
-    "2027-01-08": 2851,
-    "2027-01-09": 2628,
-    "2027-01-10": 2444,
-    "2027-01-11": 2128,
-    "2027-01-12": 1995,
-    "2027-01-13": 2063,
-    "2027-01-14": 2042,
-    "2027-01-15": 1995,
-    "2027-01-16": 2078
+"2027-01-01":5295,
+"2027-01-02":5128,
+"2027-01-03":3949,
+"2027-01-04":2896,
+"2027-01-05":2602,
+"2027-01-06":2538,
+"2027-01-07":2738,
+"2027-01-08":2851,
+"2027-01-09":2628,
+"2027-01-10":2444,
+"2027-01-11":2128,
+"2027-01-12":1995,
+"2027-01-13":2063,
+"2027-01-14":2042,
+"2027-01-15":1995,
+"2027-01-16":2078
 
 };
 
 
-/*
-============================================================
-MÍNIMO DE NOITES DO PRICELABS
-============================================================
-
-O PriceLabs trabalha o Min Stay como regra de chegada
-(check-in). Portanto, usamos o Min Stay da data de entrada.
-
-============================================================
-*/
+/* ========================================================
+   MIN STAY — PRICELABS
+======================================================== */
 
 
 const minStay = {
 
-    "2026-09-05": 3,
-    "2026-09-06": 3,
-    "2026-09-07": 3,
-    "2026-09-08": 3,
-    "2026-09-09": 3,
-    "2026-09-10": 3,
-    "2026-09-11": 3,
-    "2026-09-12": 3,
-    "2026-09-13": 2,
-    "2026-09-14": 2,
-    "2026-09-15": 2,
-    "2026-09-16": 2,
-    "2026-09-17": 2,
-    "2026-09-18": 2,
-    "2026-09-19": 2,
-    "2026-09-20": 2,
-    "2026-09-21": 2,
-    "2026-09-22": 2,
-    "2026-09-23": 2,
-    "2026-09-24": 2,
-    "2026-09-25": 2,
-    "2026-09-26": 2,
-    "2026-09-27": 2,
-    "2026-09-28": 2,
-    "2026-09-29": 2,
-    "2026-09-30": 2,
+"2026-09-05":3,
+"2026-09-06":3,
+"2026-09-07":3,
+"2026-09-08":3,
+"2026-09-09":3,
+"2026-09-10":3,
+"2026-09-11":3,
+"2026-09-12":3,
+"2026-09-13":2,
+"2026-09-14":2,
+"2026-09-15":2,
+"2026-09-16":2,
+"2026-09-17":2,
+"2026-09-18":2,
+"2026-09-19":2,
+"2026-09-20":2,
+"2026-09-21":2,
+"2026-09-22":2,
+"2026-09-23":2,
+"2026-09-24":2,
+"2026-09-25":2,
+"2026-09-26":2,
+"2026-09-27":2,
+"2026-09-28":2,
+"2026-09-29":2,
+"2026-09-30":2,
 
-    "2026-10-01": 2,
-    "2026-10-02": 2,
-    "2026-10-03": 2,
-    "2026-10-04": 2,
-    "2026-10-05": 2,
-    "2026-10-06": 2,
-    "2026-10-07": 2,
-    "2026-10-08": 3,
-    "2026-10-09": 3,
-    "2026-10-10": 3,
-    "2026-10-11": 3,
-    "2026-10-12": 2,
-    "2026-10-13": 2,
-    "2026-10-14": 2,
-    "2026-10-15": 2,
-    "2026-10-16": 2,
-    "2026-10-17": 2,
-    "2026-10-18": 2,
-    "2026-10-19": 2,
-    "2026-10-20": 2,
-    "2026-10-21": 2,
-    "2026-10-22": 2,
-    "2026-10-23": 2,
-    "2026-10-24": 2,
-    "2026-10-25": 2,
-    "2026-10-26": 2,
-    "2026-10-27": 1,
-    "2026-10-28": 2,
-    "2026-10-29": 3,
-    "2026-10-30": 3,
-    "2026-10-31": 3,
+"2026-10-01":2,
+"2026-10-02":2,
+"2026-10-03":2,
+"2026-10-04":2,
+"2026-10-05":2,
+"2026-10-06":2,
+"2026-10-07":2,
+"2026-10-08":3,
+"2026-10-09":3,
+"2026-10-10":3,
+"2026-10-11":3,
+"2026-10-12":2,
+"2026-10-13":2,
+"2026-10-14":2,
+"2026-10-15":2,
+"2026-10-16":2,
+"2026-10-17":2,
+"2026-10-18":2,
+"2026-10-19":2,
+"2026-10-20":2,
+"2026-10-21":2,
+"2026-10-22":2,
+"2026-10-23":2,
+"2026-10-24":2,
+"2026-10-25":2,
+"2026-10-26":2,
+"2026-10-27":1,
+"2026-10-28":2,
+"2026-10-29":3,
+"2026-10-30":3,
+"2026-10-31":3,
 
-    "2026-11-01": 3,
-    "2026-11-02": 3,
-    "2026-11-03": 2,
-    "2026-11-04": 2,
-    "2026-11-05": 2,
-    "2026-11-06": 2,
-    "2026-11-07": 2,
-    "2026-11-08": 2,
-    "2026-11-09": 2,
-    "2026-11-10": 2,
-    "2026-11-11": 2,
-    "2026-11-12": 3,
-    "2026-11-13": 2,
-    "2026-11-14": 2,
-    "2026-11-15": 2,
-    "2026-11-16": 2,
-    "2026-11-17": 2,
-    "2026-11-18": 2,
-    "2026-11-19": 3,
-    "2026-11-20": 3,
-    "2026-11-21": 3,
-    "2026-11-22": 3,
-    "2026-11-23": 2,
-    "2026-11-24": 2,
-    "2026-11-25": 2,
-    "2026-11-26": 2,
-    "2026-11-27": 2,
-    "2026-11-28": 2,
-    "2026-11-29": 2,
-    "2026-11-30": 2,
+"2026-11-01":3,
+"2026-11-02":3,
+"2026-11-03":2,
+"2026-11-04":2,
+"2026-11-05":2,
+"2026-11-06":2,
+"2026-11-07":2,
+"2026-11-08":2,
+"2026-11-09":2,
+"2026-11-10":2,
+"2026-11-11":2,
+"2026-11-12":3,
+"2026-11-13":2,
+"2026-11-14":2,
+"2026-11-15":2,
+"2026-11-16":2,
+"2026-11-17":2,
+"2026-11-18":2,
+"2026-11-19":3,
+"2026-11-20":3,
+"2026-11-21":3,
+"2026-11-22":3,
+"2026-11-23":2,
+"2026-11-24":2,
+"2026-11-25":2,
+"2026-11-26":2,
+"2026-11-27":2,
+"2026-11-28":2,
+"2026-11-29":2,
+"2026-11-30":2,
 
-    "2026-12-01": 2,
-    "2026-12-02": 2,
-    "2026-12-03": 2,
-    "2026-12-04": 2,
-    "2026-12-05": 2,
-    "2026-12-06": 2,
-    "2026-12-07": 2,
-    "2026-12-08": 2,
-    "2026-12-09": 2,
-    "2026-12-10": 2,
-    "2026-12-11": 2,
-    "2026-12-12": 2,
-    "2026-12-13": 2,
-    "2026-12-14": 2,
-    "2026-12-15": 2,
-    "2026-12-16": 2,
-    "2026-12-17": 2,
-    "2026-12-18": 2,
-    "2026-12-19": 2,
-    "2026-12-20": 2,
-    "2026-12-21": 2,
-    "2026-12-22": 5,
-    "2026-12-23": 4,
-    "2026-12-24": 3,
-    "2026-12-25": 3,
-    "2026-12-26": 3,
-    "2026-12-27": 3,
-    "2026-12-28": 4,
-    "2026-12-29": 4,
-    "2026-12-30": 4,
-    "2026-12-31": 4,
+"2026-12-01":2,
+"2026-12-02":2,
+"2026-12-03":2,
+"2026-12-04":2,
+"2026-12-05":2,
+"2026-12-06":2,
+"2026-12-07":2,
+"2026-12-08":2,
+"2026-12-09":2,
+"2026-12-10":2,
+"2026-12-11":2,
+"2026-12-12":2,
+"2026-12-13":2,
+"2026-12-14":2,
+"2026-12-15":2,
+"2026-12-16":2,
+"2026-12-17":2,
+"2026-12-18":2,
+"2026-12-19":2,
+"2026-12-20":2,
+"2026-12-21":2,
+"2026-12-22":5,
+"2026-12-23":4,
+"2026-12-24":3,
+"2026-12-25":3,
+"2026-12-26":3,
+"2026-12-27":3,
+"2026-12-28":4,
+"2026-12-29":4,
+"2026-12-30":4,
+"2026-12-31":4,
 
-    "2027-01-01": 4,
-    "2027-01-02": 4,
-    "2027-01-03": 4,
-    "2027-01-04": 2,
-    "2027-01-05": 2,
-    "2027-01-06": 2,
-    "2027-01-07": 2,
-    "2027-01-08": 2,
-    "2027-01-09": 2,
-    "2027-01-10": 2,
-    "2027-01-11": 2,
-    "2027-01-12": 2,
-    "2027-01-13": 2,
-    "2027-01-14": 2,
-    "2027-01-15": 2,
-    "2027-01-16": 2
+"2027-01-01":4,
+"2027-01-02":4,
+"2027-01-03":4,
+"2027-01-04":2,
+"2027-01-05":2,
+"2027-01-06":2,
+"2027-01-07":2,
+"2027-01-08":2,
+"2027-01-09":2,
+"2027-01-10":2,
+"2027-01-11":2,
+"2027-01-12":2,
+"2027-01-13":2,
+"2027-01-14":2,
+"2027-01-15":2,
+"2027-01-16":2
 
 };
 
 
-/*
-============================================================
-RESERVAS CONFIRMADAS / AIRBNB ICAL
-============================================================
-*/
+/* ========================================================
+   RESERVAS AIRBNB
+======================================================== */
 
 
 const reservas = [
 
-    {
-        entrada: "2026-09-05",
-        saida: "2026-09-08"
-    },
+{
+    entrada:"2026-09-05",
+    saida:"2026-09-08"
+},
 
-    {
-        entrada: "2026-09-12",
-        saida: "2026-09-15"
-    },
+{
+    entrada:"2026-09-12",
+    saida:"2026-09-15"
+},
 
-    {
-        entrada: "2026-09-18",
-        saida: "2026-09-20"
-    },
+{
+    entrada:"2026-09-18",
+    saida:"2026-09-20"
+},
 
-    {
-        entrada: "2026-10-08",
-        saida: "2026-10-13"
-    },
+{
+    entrada:"2026-10-08",
+    saida:"2026-10-13"
+},
 
-    {
-        entrada: "2026-10-23",
-        saida: "2026-10-25"
-    },
+{
+    entrada:"2026-10-23",
+    saida:"2026-10-25"
+},
 
-    {
-        entrada: "2026-10-30",
-        saida: "2026-11-03"
-    },
+{
+    entrada:"2026-10-30",
+    saida:"2026-11-03"
+},
 
-    {
-        entrada: "2026-11-07",
-        saida: "2026-11-09"
-    },
+{
+    entrada:"2026-11-07",
+    saida:"2026-11-09"
+},
 
-    {
-        entrada: "2026-11-19",
-        saida: "2026-11-22"
-    },
+{
+    entrada:"2026-11-19",
+    saida:"2026-11-22"
+},
 
-    {
-        entrada: "2027-01-05",
-        saida: "2027-01-13"
-    }
+{
+    entrada:"2027-01-05",
+    saida:"2027-01-13"
+}
 
 ];
 
 
-/*
-============================================================
-BLOQUEIOS DO AIRBNB
-============================================================
-*/
+/* ========================================================
+   BLOQUEIOS AIRBNB
+======================================================== */
 
 
 const bloqueios = [
 
-    {
-        entrada: "2026-09-03",
-        saida: "2026-09-05"
-    },
+{
+    entrada:"2026-09-03",
+    saida:"2026-09-05"
+},
 
-    {
-        entrada: "2026-09-08",
-        saida: "2026-09-12"
-    },
+{
+    entrada:"2026-09-08",
+    saida:"2026-09-12"
+},
 
-    {
-        entrada: "2026-09-15",
-        saida: "2026-09-18"
-    },
+{
+    entrada:"2026-09-15",
+    saida:"2026-09-18"
+},
 
-    {
-        entrada: "2026-09-20",
-        saida: "2026-09-22"
-    },
+{
+    entrada:"2026-09-20",
+    saida:"2026-09-22"
+},
 
-    {
-        entrada: "2026-10-06",
-        saida: "2026-10-08"
-    },
+{
+    entrada:"2026-10-06",
+    saida:"2026-10-08"
+},
 
-    {
-        entrada: "2026-10-13",
-        saida: "2026-10-15"
-    },
+{
+    entrada:"2026-10-13",
+    saida:"2026-10-15"
+},
 
-    {
-        entrada: "2026-10-21",
-        saida: "2026-10-23"
-    },
+{
+    entrada:"2026-10-21",
+    saida:"2026-10-23"
+},
 
-    {
-        entrada: "2026-10-25",
-        saida: "2026-10-27"
-    },
+{
+    entrada:"2026-10-25",
+    saida:"2026-10-27"
+},
 
-    {
-        entrada: "2026-10-28",
-        saida: "2026-10-30"
-    },
+{
+    entrada:"2026-10-28",
+    saida:"2026-10-30"
+},
 
-    {
-        entrada: "2026-11-03",
-        saida: "2026-11-07"
-    },
+{
+    entrada:"2026-11-03",
+    saida:"2026-11-07"
+},
 
-    {
-        entrada: "2026-11-09",
-        saida: "2026-11-11"
-    },
+{
+    entrada:"2026-11-09",
+    saida:"2026-11-11"
+},
 
-    {
-        entrada: "2026-11-17",
-        saida: "2026-11-19"
-    },
+{
+    entrada:"2026-11-17",
+    saida:"2026-11-19"
+},
 
-    {
-        entrada: "2026-11-22",
-        saida: "2026-11-24"
-    },
+{
+    entrada:"2026-11-22",
+    saida:"2026-11-24"
+},
 
-    {
-        entrada: "2027-01-03",
-        saida: "2027-01-05"
-    },
+{
+    entrada:"2027-01-03",
+    saida:"2027-01-05"
+},
 
-    {
-        entrada: "2027-01-13",
-        saida: "2027-01-15"
-    }
+{
+    entrada:"2027-01-13",
+    saida:"2027-01-15"
+}
 
 ];
 
 
-/*
-============================================================
-CONVERTER DATA
-============================================================
-*/
+/* ========================================================
+   ESTADO DO CALENDÁRIO
+======================================================== */
+
+
+let dataCalendario = new Date();
+
+let entradaSelecionada = null;
+
+let saidaSelecionada = null;
+
+
+/* ========================================================
+   FUNÇÕES DE DATA
+======================================================== */
 
 
 function converterData(data) {
@@ -968,78 +1297,43 @@ function converterData(data) {
 }
 
 
-/*
-============================================================
-ADICIONAR DIAS
-============================================================
-*/
-
-
 function adicionarDias(data, quantidade) {
 
-    const resultado = new Date(data);
+    const nova = new Date(data);
 
-    resultado.setDate(
-        resultado.getDate() + quantidade
+    nova.setDate(
+        nova.getDate() + quantidade
     );
 
-    return resultado;
+    return nova;
 
 }
 
 
-/*
-============================================================
-FORMATAR DATA
-============================================================
-*/
+function formatarISO(data) {
 
+    const ano = data.getFullYear();
 
-function formatarDataISO(data) {
+    const mes = String(
+        data.getMonth() + 1
+    ).padStart(2,"0");
 
-    const ano =
-        data.getFullYear();
-
-    const mes =
-        String(data.getMonth() + 1)
-        .padStart(2, "0");
-
-    const dia =
-        String(data.getDate())
-        .padStart(2, "0");
+    const dia = String(
+        data.getDate()
+    ).padStart(2,"0");
 
     return `${ano}-${mes}-${dia}`;
 
 }
 
 
-/*
-============================================================
-FORMATAR DATA PARA EXIBIÇÃO
-============================================================
-*/
-
-
 function formatarData(data) {
 
     const partes = data.split("-");
 
-    return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-    );
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
 
 }
-
-
-/*
-============================================================
-FORMATAR MOEDA
-============================================================
-*/
 
 
 function formatarMoeda(valor) {
@@ -1047,56 +1341,64 @@ function formatarMoeda(valor) {
     return valor.toLocaleString(
         "pt-BR",
         {
-            style: "currency",
-            currency: "BRL"
+            style:"currency",
+            currency:"BRL"
         }
     );
 
 }
 
 
-/*
-============================================================
-VERIFICAR CONFLITO
-============================================================
-
-Checkout pode ser igual ao próximo check-in.
-
-Exemplo:
-
-05/09 → 08/09
-
-08/09 → 10/09
-
-PERMITIDO.
-
-============================================================
-*/
+/* ========================================================
+   HOJE
+======================================================== */
 
 
-function existeConflito(
-    entrada,
-    saida,
-    lista
-) {
+function hojeISO() {
 
-    const novaEntrada =
-        converterData(entrada);
+    const hoje = new Date();
 
-    const novaSaida =
-        converterData(saida);
+    hoje.setHours(0,0,0,0);
 
-    return lista.some(periodo => {
+    return formatarISO(hoje);
 
-        const periodoEntrada =
-            converterData(periodo.entrada);
+}
 
-        const periodoSaida =
-            converterData(periodo.saida);
+
+/* ========================================================
+   VERIFICAR BLOQUEIO
+======================================================== */
+
+
+function dataBloqueada(data) {
+
+    const hoje = hojeISO();
+
+    if (data < hoje) {
+        return true;
+    }
+
+
+    const bloqueada = reservas.some(periodo => {
 
         return (
-            novaEntrada < periodoSaida &&
-            novaSaida > periodoEntrada
+            data >= periodo.entrada &&
+            data < periodo.saida
+        );
+
+    });
+
+
+    if (bloqueada) {
+        return true;
+    }
+
+
+    return bloqueios.some(periodo => {
+
+        return (
+            data >= periodo.entrada &&
+            data < periodo.saida
         );
 
     });
@@ -1104,11 +1406,9 @@ function existeConflito(
 }
 
 
-/*
-============================================================
-VERIFICAR DISPONIBILIDADE
-============================================================
-*/
+/* ========================================================
+   DISPONIBILIDADE DO PERÍODO
+======================================================== */
 
 
 function verificarDisponibilidade(
@@ -1116,109 +1416,754 @@ function verificarDisponibilidade(
     saida
 ) {
 
-    if (
-        existeConflito(
-            entrada,
-            saida,
-            reservas
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    if (
-        existeConflito(
-            entrada,
-            saida,
-            bloqueios
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/*
-============================================================
-OBTER MÍNIMO DE NOITES
-============================================================
-*/
-
-
-function obterMinimoNoites(entrada) {
-
-    return minStay[entrada] || null;
-
-}
-
-
-/*
-============================================================
-OBTER PREÇO
-============================================================
-*/
-
-
-function obterPreco(data) {
-
-    return precos[data] || null;
-
-}
-
-
-/*
-============================================================
-CALCULAR VALOR DA ESTADIA
-============================================================
-*/
-
-
-function calcularValorEstadia(
-    entrada,
-    saida
-) {
-
-    const dataEntrada =
+    const inicio =
         converterData(entrada);
 
-    const dataSaida =
+    const fim =
         converterData(saida);
 
-    let total = 0;
 
-    const diarias = [];
+    return ![...reservas,...bloqueios]
+        .some(periodo => {
 
-    let dataAtual =
-        new Date(dataEntrada);
+            const pInicio =
+                converterData(periodo.entrada);
+
+            const pFim =
+                converterData(periodo.saida);
+
+            return (
+                inicio < pFim &&
+                fim > pInicio
+            );
+
+        });
+
+}
 
 
-    while (
-        dataAtual < dataSaida
+/* ========================================================
+   RENDERIZAR CALENDÁRIO
+======================================================== */
+
+
+function renderizarCalendario() {
+
+    const calendario =
+        document.getElementById(
+            "calendario"
+        );
+
+    calendario.innerHTML = "";
+
+
+    const ano =
+        dataCalendario.getFullYear();
+
+    const mes =
+        dataCalendario.getMonth();
+
+
+    const nomeMes =
+        dataCalendario.toLocaleDateString(
+            "pt-BR",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "mesAtual"
+    ).textContent = nomeMes;
+
+
+    const primeiroDia =
+        new Date(
+            ano,
+            mes,
+            1
+        ).getDay();
+
+
+    const quantidadeDias =
+        new Date(
+            ano,
+            mes + 1,
+            0
+        ).getDate();
+
+
+    /*
+    Espaços antes do primeiro dia
+    */
+
+
+    for (
+        let i = 0;
+        i < primeiroDia;
+        i++
+    ) {
+
+        const vazio =
+            document.createElement("div");
+
+        vazio.className =
+            "dia vazio";
+
+        calendario.appendChild(
+            vazio
+        );
+
+    }
+
+
+    /*
+    Dias
+    */
+
+
+    for (
+        let dia = 1;
+        dia <= quantidadeDias;
+        dia++
     ) {
 
         const data =
-            formatarDataISO(dataAtual);
+            new Date(
+                ano,
+                mes,
+                dia
+            );
+
+
+        const iso =
+            formatarISO(data);
+
+
+        const elemento =
+            document.createElement("div");
+
+        elemento.className =
+            "dia";
+
+
+        /*
+        Número
+        */
+
+
+        const numero =
+            document.createElement("span");
+
+        numero.className =
+            "numero-dia";
+
+        numero.textContent =
+            dia;
+
+        elemento.appendChild(
+            numero
+        );
+
+
+        /*
+        Mínimo de noites
+        */
+
+
+        if (
+            minStay[iso]
+        ) {
+
+            const minimo =
+                document.createElement("span");
+
+            minimo.className =
+                "minimo";
+
+            minimo.textContent =
+                `${minStay[iso]}n`;
+
+            elemento.appendChild(
+                minimo
+            );
+
+        }
+
+
+        /*
+        Hoje
+        */
+
+
+        if (
+            iso === hojeISO()
+        ) {
+
+            elemento.classList.add(
+                "hoje"
+            );
+
+        }
+
+
+        /*
+        Bloqueio
+        */
+
+
+        if (
+            dataBloqueada(iso)
+        ) {
+
+            elemento.classList.add(
+                "bloqueado"
+            );
+
+        }
+
+
+        /*
+        Entrada selecionada
+        */
+
+
+        if (
+            iso === entradaSelecionada
+        ) {
+
+            elemento.classList.add(
+                "entrada"
+            );
+
+        }
+
+
+        /*
+        Saída selecionada
+        */
+
+
+        if (
+            iso === saidaSelecionada
+        ) {
+
+            elemento.classList.add(
+                "saida"
+            );
+
+        }
+
+
+        /*
+        Intervalo
+        */
+
+
+        if (
+            entradaSelecionada &&
+            saidaSelecionada &&
+            iso > entradaSelecionada &&
+            iso < saidaSelecionada &&
+            !dataBloqueada(iso)
+        ) {
+
+            elemento.classList.add(
+                "intervalo"
+            );
+
+        }
+
+
+        /*
+        Clique
+        */
+
+
+        if (
+            !dataBloqueada(iso)
+        ) {
+
+            elemento.addEventListener(
+                "click",
+                () => selecionarData(iso)
+            );
+
+        }
+
+
+        calendario.appendChild(
+            elemento
+        );
+
+    }
+
+}
+
+
+/* ========================================================
+   SELECIONAR DATA
+======================================================== */
+
+
+function selecionarData(data) {
+
+
+    /*
+    Primeiro clique = entrada
+    */
+
+
+    if (
+        !entradaSelecionada ||
+        (
+            entradaSelecionada &&
+            saidaSelecionada
+        )
+    ) {
+
+        entradaSelecionada =
+            data;
+
+        saidaSelecionada =
+            null;
+
+        atualizarSelecao();
+
+        renderizarCalendario();
+
+        calcular();
+
+        return;
+
+    }
+
+
+    /*
+    Segundo clique
+    */
+
+
+    if (
+        data <= entradaSelecionada
+    ) {
+
+        entradaSelecionada =
+            data;
+
+        saidaSelecionada =
+            null;
+
+        atualizarSelecao();
+
+        renderizarCalendario();
+
+        calcular();
+
+        return;
+
+    }
+
+
+    /*
+    Verificar se há bloqueio no intervalo
+    */
+
+
+    if (
+        !verificarDisponibilidade(
+            entradaSelecionada,
+            data
+        )
+    ) {
+
+        document.getElementById(
+            "status"
+        ).innerHTML = `
+
+            <div class="status indisponivel">
+
+                ❌ Este período contém
+                datas reservadas ou bloqueadas.
+
+                <br>
+
+                Escolha outra data de saída.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    Definir saída
+    */
+
+
+    saidaSelecionada =
+        data;
+
+
+    atualizarSelecao();
+
+    renderizarCalendario();
+
+    calcular();
+
+}
+
+
+/* ========================================================
+   ATUALIZAR TEXTO DAS DATAS
+======================================================== */
+
+
+function atualizarSelecao() {
+
+    document.getElementById(
+        "entradaTexto"
+    ).textContent =
+        entradaSelecionada
+        ? formatarData(entradaSelecionada)
+        : "Selecione uma data";
+
+
+    document.getElementById(
+        "saidaTexto"
+    ).textContent =
+        saidaSelecionada
+        ? formatarData(saidaSelecionada)
+        : "Selecione uma data";
+
+}
+
+
+/* ========================================================
+   NAVEGAÇÃO
+======================================================== */
+
+
+function mesAnterior() {
+
+    const hoje =
+        new Date();
+
+    const mesAtual =
+        new Date(
+            hoje.getFullYear(),
+            hoje.getMonth(),
+            1
+        );
+
+
+    const novoMes =
+        new Date(
+            dataCalendario.getFullYear(),
+            dataCalendario.getMonth() - 1,
+            1
+        );
+
+
+    /*
+    Não permitir navegar antes
+    do mês atual
+    */
+
+
+    if (
+        novoMes >= mesAtual
+    ) {
+
+        dataCalendario =
+            novoMes;
+
+        renderizarCalendario();
+
+    }
+
+}
+
+
+function proximoMes() {
+
+    dataCalendario =
+        new Date(
+            dataCalendario.getFullYear(),
+            dataCalendario.getMonth() + 1,
+            1
+        );
+
+    renderizarCalendario();
+
+}
+
+
+/* ========================================================
+   CALCULAR VALOR
+======================================================== */
+
+
+function calcular() {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+    const botao =
+        document.getElementById(
+            "botaoReserva"
+        );
+
+    const hospedes =
+        Number(
+            document.getElementById(
+                "hospedes"
+            ).value
+        );
+
+
+    botao.disabled = true;
+
+
+    document.getElementById(
+        "resumoHospedes"
+    ).textContent =
+        hospedes || "-";
+
+
+    document.getElementById(
+        "noites"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "minimo"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        formatarMoeda(0);
+
+
+    document.getElementById(
+        "detalhamento"
+    ).style.display =
+        "none";
+
+
+    if (
+        hospedes < 1 ||
+        hospedes > maxHospedes
+    ) {
+
+        status.innerHTML = `
+
+            <div class="status aviso">
+
+                A quantidade de hóspedes deve
+                estar entre 1 e 18 pessoas.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !entradaSelecionada ||
+        !saidaSelecionada
+    ) {
+
+        status.innerHTML = `
+
+            <div class="status aviso">
+
+                Selecione a data de entrada
+                e depois a data de saída.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const entrada =
+        converterData(
+            entradaSelecionada
+        );
+
+    const saida =
+        converterData(
+            saidaSelecionada
+        );
+
+
+    const noites =
+        Math.round(
+            (
+                saida - entrada
+            ) /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+        );
+
+
+    document.getElementById(
+        "noites"
+    ).textContent =
+        noites;
+
+
+    const minimo =
+        minStay[
+            entradaSelecionada
+        ];
+
+
+    if (
+        !minimo
+    ) {
+
+        status.innerHTML = `
+
+            <div class="status aviso">
+
+                Não temos informação de
+                estadia mínima para esta data.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "minimo"
+    ).textContent =
+        `${minimo} noite${minimo === 1 ? "" : "s"}`;
+
+
+    if (
+        noites < minimo
+    ) {
+
+        status.innerHTML = `
+
+            <div class="status aviso">
+
+                Esta data exige estadia mínima de
+                <strong>${minimo} noites</strong>.
+
+                <br><br>
+
+                Você selecionou ${noites}.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    Verificar disponibilidade novamente
+    */
+
+
+    if (
+        !verificarDisponibilidade(
+            entradaSelecionada,
+            saidaSelecionada
+        )
+    ) {
+
+        status.innerHTML = `
+
+            <div class="status indisponivel">
+
+                ❌ O período selecionado
+                não está disponível.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    Calcular diárias
+    */
+
+
+    let total = 0;
+
+    let diarias = [];
+
+    let dataAtual =
+        new Date(entrada);
+
+
+    while (
+        dataAtual < saida
+    ) {
+
+        const iso =
+            formatarISO(dataAtual);
+
 
         const preco =
-            obterPreco(data);
+            precos[iso];
 
 
-        if (preco === null) {
+        if (
+            preco === undefined
+        ) {
 
-            return {
-                sucesso: false,
-                total: 0,
-                diarias: []
-            };
+            status.innerHTML = `
+
+                <div class="status aviso">
+
+                    Não temos preço disponível
+                    para ${formatarData(iso)}.
+
+                    <br><br>
+
+                    Entre em contato pelo WhatsApp.
+
+                </div>
+
+            `;
+
+            return;
 
         }
 
@@ -1228,7 +2173,7 @@ function calcularValorEstadia(
 
         diarias.push({
 
-            data: data,
+            data: iso,
 
             preco: preco
 
@@ -1244,40 +2189,26 @@ function calcularValorEstadia(
     }
 
 
-    return {
-
-        sucesso: true,
-
-        total: total,
-
-        diarias: diarias
-
-    };
-
-}
+    /*
+    Mostrar total
+    */
 
 
-/*
-============================================================
-MOSTRAR DETALHAMENTO
-============================================================
-*/
+    document.getElementById(
+        "total"
+    ).textContent =
+        formatarMoeda(total);
 
 
-function mostrarDetalhamento(
-    diarias
-) {
+    /*
+    Mostrar diárias
+    */
 
-    const detalhamento =
-        document.getElementById(
-            "detalhamento"
-        );
 
     const lista =
         document.getElementById(
             "listaDiarias"
         );
-
 
     lista.innerHTML = "";
 
@@ -1304,394 +2235,17 @@ function mostrarDetalhamento(
         `;
 
 
-        lista.appendChild(linha);
+        lista.appendChild(
+            linha
+        );
 
     });
 
 
-    detalhamento.style.display =
+    document.getElementById(
+        "detalhamento"
+    ).style.display =
         "block";
-
-}
-
-
-/*
-============================================================
-ESCONDER DETALHAMENTO
-============================================================
-*/
-
-
-function esconderDetalhamento() {
-
-    document
-        .getElementById("detalhamento")
-        .style.display = "none";
-
-}
-
-
-/*
-============================================================
-CONFIGURAR DATAS MÍNIMAS
-============================================================
-*/
-
-
-function configurarDatasMinimas() {
-
-    const hoje =
-        new Date();
-
-    const hojeISO =
-        formatarDataISO(hoje);
-
-
-    document
-        .getElementById("entrada")
-        .min = hojeISO;
-
-    document
-        .getElementById("saida")
-        .min = hojeISO;
-
-}
-
-
-/*
-============================================================
-CALCULAR
-============================================================
-*/
-
-
-function calcular() {
-
-    const entrada =
-        document.getElementById(
-            "entrada"
-        ).value;
-
-
-    const saida =
-        document.getElementById(
-            "saida"
-        ).value;
-
-
-    const hospedes =
-        Number(
-            document.getElementById(
-                "hospedes"
-            ).value
-        );
-
-
-    const noitesElemento =
-        document.getElementById(
-            "noites"
-        );
-
-
-    const minimoElemento =
-        document.getElementById(
-            "minimo"
-        );
-
-
-    const totalElemento =
-        document.getElementById(
-            "total"
-        );
-
-
-    const resumoHospedes =
-        document.getElementById(
-            "resumoHospedes"
-        );
-
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    const botao =
-        document.getElementById(
-            "botaoReserva"
-        );
-
-
-    /*
-    Estado inicial
-    */
-
-
-    botao.disabled = true;
-
-    status.innerHTML = "";
-
-    noitesElemento.textContent = "-";
-
-    minimoElemento.textContent = "-";
-
-    totalElemento.textContent =
-        formatarMoeda(0);
-
-    resumoHospedes.textContent =
-        hospedes || "-";
-
-    esconderDetalhamento();
-
-
-    /*
-    Validar hóspedes
-    */
-
-
-    if (
-        hospedes < 1 ||
-        hospedes > maxHospedes
-    ) {
-
-        status.innerHTML = `
-
-            <div class="status aviso">
-
-                A quantidade de hóspedes deve
-                estar entre 1 e 18 pessoas.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-    Datas ainda não preenchidas
-    */
-
-
-    if (!entrada || !saida) {
-
-        return;
-
-    }
-
-
-    /*
-    Validar ordem das datas
-    */
-
-
-    const dataEntrada =
-        converterData(entrada);
-
-    const dataSaida =
-        converterData(saida);
-
-
-    if (
-        dataSaida <= dataEntrada
-    ) {
-
-        status.innerHTML = `
-
-            <div class="status indisponivel">
-
-                A data de saída deve ser posterior
-                à data de entrada.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-    Calcular noites
-    */
-
-
-    const diferenca =
-        dataSaida - dataEntrada;
-
-
-    const noites =
-        Math.round(
-            diferenca /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    noitesElemento.textContent =
-        noites;
-
-
-    /*
-    Mínimo PriceLabs
-    */
-
-
-    const minimo =
-        obterMinimoNoites(entrada);
-
-
-    if (minimo === null) {
-
-        status.innerHTML = `
-
-            <div class="status aviso">
-
-                Não temos informações de preço
-                para a data de entrada selecionada.
-
-                <br><br>
-
-                Por favor, escolha outra data.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    minimoElemento.textContent =
-        `${minimo} noite${minimo === 1 ? "" : "s"}`;
-
-
-    /*
-    Verificar mínimo
-    */
-
-
-    if (noites < minimo) {
-
-        status.innerHTML = `
-
-            <div class="status aviso">
-
-                A data de entrada selecionada
-                exige estadia mínima de
-
-                <strong>
-                    ${minimo} noite${minimo === 1 ? "" : "s"}
-                </strong>.
-
-                <br><br>
-
-                Você selecionou apenas
-                ${noites} noite${noites === 1 ? "" : "s"}.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-    Verificar disponibilidade Airbnb
-    */
-
-
-    if (
-        !verificarDisponibilidade(
-            entrada,
-            saida
-        )
-    ) {
-
-        status.innerHTML = `
-
-            <div class="status indisponivel">
-
-                ❌ As datas selecionadas não estão
-                disponíveis.
-
-                <br>
-
-                Por favor, escolha outro período.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-    Calcular preços individuais
-    */
-
-
-    const calculo =
-        calcularValorEstadia(
-            entrada,
-            saida
-        );
-
-
-    if (!calculo.sucesso) {
-
-        status.innerHTML = `
-
-            <div class="status aviso">
-
-                Não temos preços disponíveis
-                para todas as noites selecionadas.
-
-                <br><br>
-
-                Por favor, escolha outro período.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-    Mostrar total
-    */
-
-
-    totalElemento.textContent =
-        formatarMoeda(
-            calculo.total
-        );
-
-
-    /*
-    Mostrar detalhamento
-    */
-
-
-    mostrarDetalhamento(
-        calculo.diarias
-    );
-
-
-    /*
-    Tudo certo
-    */
 
 
     status.innerHTML = `
@@ -1711,25 +2265,46 @@ function calcular() {
 }
 
 
-/*
-============================================================
-SOLICITAR RESERVA
-============================================================
-*/
+/* ========================================================
+   WHATSAPP
+======================================================== */
 
 
 function solicitarReserva() {
 
-    const entrada =
-        document.getElementById(
-            "entrada"
-        ).value;
+    if (
+        !entradaSelecionada ||
+        !saidaSelecionada
+    ) {
+
+        alert(
+            "Selecione as datas."
+        );
+
+        return;
+
+    }
 
 
-    const saida =
-        document.getElementById(
-            "saida"
-        ).value;
+    /*
+    Rechecagem final
+    */
+
+
+    if (
+        !verificarDisponibilidade(
+            entradaSelecionada,
+            saidaSelecionada
+        )
+    ) {
+
+        alert(
+            "Desculpe, essas datas não estão mais disponíveis."
+        );
+
+        return;
+
+    }
 
 
     const hospedes =
@@ -1740,123 +2315,43 @@ function solicitarReserva() {
         );
 
 
-    /*
-    Validação
-    */
-
-
-    if (!entrada || !saida) {
-
-        alert(
-            "Selecione as datas de entrada e saída."
+    const entrada =
+        converterData(
+            entradaSelecionada
         );
 
-        return;
-
-    }
-
-
-    if (
-        hospedes < 1 ||
-        hospedes > maxHospedes
-    ) {
-
-        alert(
-            "A quantidade de hóspedes deve estar entre 1 e 18."
+    const saida =
+        converterData(
+            saidaSelecionada
         );
-
-        return;
-
-    }
-
-
-    /*
-    Verificar disponibilidade novamente
-    */
-
-
-    if (
-        !verificarDisponibilidade(
-            entrada,
-            saida
-        )
-    ) {
-
-        alert(
-            "Desculpe, essas datas não estão mais disponíveis."
-        );
-
-        calcular();
-
-        return;
-
-    }
-
-
-    /*
-    Calcular noites
-    */
-
-
-    const dataEntrada =
-        converterData(entrada);
-
-    const dataSaida =
-        converterData(saida);
-
-
-    const diferenca =
-        dataSaida - dataEntrada;
 
 
     const noites =
         Math.round(
-            diferenca /
-            (1000 * 60 * 60 * 24)
+            (
+                saida - entrada
+            ) /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
         );
 
 
-    /*
-    Verificar mínimo
-    */
-
-
     const minimo =
-        obterMinimoNoites(entrada);
+        minStay[
+            entradaSelecionada
+        ];
 
 
     if (
-        minimo === null ||
         noites < minimo
     ) {
 
         alert(
-            `A estadia mínima para essa data é de ${minimo} noites.`
-        );
-
-        calcular();
-
-        return;
-
-    }
-
-
-    /*
-    Calcular valor novamente
-    */
-
-
-    const calculo =
-        calcularValorEstadia(
-            entrada,
-            saida
-        );
-
-
-    if (!calculo.sucesso) {
-
-        alert(
-            "Não foi possível calcular o valor completo da estadia."
+            `A estadia mínima para esta data é de ${minimo} noites.`
         );
 
         return;
@@ -1865,27 +2360,60 @@ function solicitarReserva() {
 
 
     /*
-    ========================================================
-    MONTAR RESUMO DAS DIÁRIAS
-    ========================================================
+    Calcular novamente
     */
 
+
+    let total = 0;
 
     let resumoDiarias = "";
 
+    let dataAtual =
+        new Date(entrada);
 
-    calculo.diarias.forEach(item => {
+
+    while (
+        dataAtual < saida
+    ) {
+
+        const iso =
+            formatarISO(dataAtual);
+
+        const preco =
+            precos[iso];
+
+
+        if (
+            preco === undefined
+        ) {
+
+            alert(
+                "Não foi possível calcular todas as diárias."
+            );
+
+            return;
+
+        }
+
+
+        total += preco;
+
 
         resumoDiarias +=
-            `• ${formatarData(item.data)}: ${formatarMoeda(item.preco)}\n`;
+            `• ${formatarData(iso)}: ${formatarMoeda(preco)}\n`;
 
-    });
+
+        dataAtual =
+            adicionarDias(
+                dataAtual,
+                1
+            );
+
+    }
 
 
     /*
-    ========================================================
-    MENSAGEM WHATSAPP
-    ========================================================
+    Mensagem
     */
 
 
@@ -1893,32 +2421,26 @@ function solicitarReserva() {
 
 `Olá! Gostaria de solicitar uma reserva na Vila Azular.
 
-📅 Entrada: ${formatarData(entrada)}
-📅 Saída: ${formatarData(saida)}
+📅 Entrada: ${formatarData(entradaSelecionada)}
+📅 Saída: ${formatarData(saidaSelecionada)}
 🌙 Noites: ${noites}
-👥 Hóspedes: ${hospedes} pessoa${hospedes === 1 ? "" : "s"}
+👥 Hóspedes: ${hospedes}
 
-💰 Valor estimado: ${formatarMoeda(calculo.total)}
+💰 Valor estimado: ${formatarMoeda(total)}
 
-📋 Valor das diárias:
+📋 Diárias:
 ${resumoDiarias}
 
 Gostaria de confirmar a disponibilidade e prosseguir com a reserva.`;
 
 
-    /*
-    Codificar mensagem
-    */
-
-
     const url =
-        `https://wa.me/${whatsapp}?text=` +
-        encodeURIComponent(mensagem);
-
-
-    /*
-    Abrir WhatsApp
-    */
+        "https://wa.me/" +
+        whatsapp +
+        "?text=" +
+        encodeURIComponent(
+            mensagem
+        );
 
 
     window.open(
@@ -1929,40 +2451,9 @@ Gostaria de confirmar a disponibilidade e prosseguir com a reserva.`;
 }
 
 
-/*
-============================================================
-EVENTOS
-============================================================
-*/
-
-
-document
-    .getElementById("entrada")
-    .addEventListener(
-        "change",
-        function() {
-
-            const entrada =
-                this.value;
-
-
-            document
-                .getElementById("saida")
-                .min = entrada;
-
-
-            calcular();
-
-        }
-    );
-
-
-document
-    .getElementById("saida")
-    .addEventListener(
-        "change",
-        calcular
-    );
+/* ========================================================
+   HÓSPEDES
+======================================================== */
 
 
 document
@@ -1973,20 +2464,19 @@ document
     );
 
 
-/*
-============================================================
-INICIALIZAÇÃO
-============================================================
-*/
+/* ========================================================
+   INICIALIZAÇÃO
+======================================================== */
 
 
-configurarDatasMinimas();
+renderizarCalendario();
+
+atualizarSelecao();
 
 calcular();
 
 
 </script>
-
 
 </body>
 
